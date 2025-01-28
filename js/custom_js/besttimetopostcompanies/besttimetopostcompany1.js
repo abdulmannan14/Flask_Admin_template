@@ -19,7 +19,7 @@ function populateBestTimeToPost1(data) {
                 },
             }
         },
-        series: data.company1,
+        series: data.STC,
         title: {
             // text: 'Single-Colored Heatmap Example',
             align: 'center',

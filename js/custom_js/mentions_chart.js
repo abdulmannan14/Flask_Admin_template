@@ -33,7 +33,7 @@ function populateMentionsChart(data) {
         xaxis: {
             categories: dummyData.categories,
             title: {
-                text: 'Months',
+                // text: 'Months',
                 style: {
                     color: '#ACB5BD' // Match the reference chart's axis label color
                 }
@@ -66,6 +66,7 @@ function populateMentionsChart(data) {
             opacity: 1 // Match reference chart's transparency
         },
         grid: {
+            show: false,
             borderColor: '#212529', // Match reference chart grid color
             strokeDashArray: 0 // Solid lines for the grid
         },
@@ -85,7 +86,7 @@ function populateMentionsChart(data) {
             text: 'Volume of Mentions',
             align: 'left',
             style: {
-                fontSize: '18px',
+                fontSize: '28px',
                 fontWeight: 'bold',
                 color: '#ffffff' // Title color
             }

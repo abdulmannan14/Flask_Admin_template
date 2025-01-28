@@ -8,12 +8,31 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)
 
+substring_mapping = {
+    "zain": "Zain",
+    "ooredo": "Ooredoo",
+    "stc": "STC"
+}
+
+
+# Function to process the JSON data
+def group_tracked_keywords(json_data):
+    for entry in json_data:
+        if "TRACKED KEYWORD" in entry:
+            tracked_keyword = entry["TRACKED KEYWORD"].lower()
+            for substring, group_name in substring_mapping.items():
+                if substring in tracked_keyword:
+                    # Replace the tracked keyword with the group name
+                    entry["TRACKED KEYWORD"] = group_name
+                    break
+    return json_data
+
 
 # Sample function to process the JSON data
 def process_data():
     with open("balanced_dummy_aggregated_11k.json", "r") as file:
         data = json.load(file)
-        print("data length is ====", len(data))
+        # print("data length is ====", len(data))
         # Example of data processing: filtering or aggregating
         # processed_data = {
         #     "total_items": len(data),
@@ -27,13 +46,13 @@ def process_data():
 
 
 def get_general_stats(data):
-    tracked_keywords_count = {"company1": 0, "company2": 0, "company3": 0}
-    reach_sum = {"company1": 0, "company2": 0, "company3": 0}
-    social_interactions_sum = {"company1": 0, "company2": 0, "company3": 0}
+    tracked_keywords_count = {"STC": 0, "Zain": 0, "Ooredoo": 0}
+    reach_sum = {"STC": 0, "Zain": 0, "Ooredoo": 0}
+    social_interactions_sum = {"STC": 0, "Zain": 0, "Ooredoo": 0}
     sentiment_counts = {
-        "positive": {"company1": 0, "company2": 0, "company3": 0},
-        "negative": {"company1": 0, "company2": 0, "company3": 0},
-        "neutral": {"company1": 0, "company2": 0, "company3": 0}
+        "positive": {"STC": 0, "Zain": 0, "Ooredoo": 0},
+        "negative": {"STC": 0, "Zain": 0, "Ooredoo": 0},
+        "neutral": {"STC": 0, "Zain": 0, "Ooredoo": 0}
     }
 
     # Process the data
@@ -78,7 +97,7 @@ def get_general_stats(data):
 
 def get_volume_of_mentions(data):
     # Initialize a nested dictionary to hold the volume by date
-    volume_by_date = defaultdict(lambda: {"company1": 0, "company2": 0, "company3": 0})
+    volume_by_date = defaultdict(lambda: {"STC": 0, "Zain": 0, "Ooredoo": 0})
 
     # Process the data
     for record in data:
@@ -99,16 +118,16 @@ def get_volume_of_mentions(data):
     categories = sorted(volume_by_date.keys())  # Sorted dates
     series = [
         {
-            "name": "company1",
-            "data": [volume_by_date[date]["company1"] for date in categories]
+            "name": "STC",
+            "data": [volume_by_date[date]["STC"] for date in categories]
         },
         {
-            "name": "company2",
-            "data": [volume_by_date[date]["company2"] for date in categories]
+            "name": "Zain",
+            "data": [volume_by_date[date]["Zain"] for date in categories]
         },
         {
-            "name": "company3",
-            "data": [volume_by_date[date]["company3"] for date in categories]
+            "name": "Ooredoo",
+            "data": [volume_by_date[date]["Ooredoo"] for date in categories]
         }
     ]
 
@@ -125,7 +144,7 @@ def get_volume_of_mentions(data):
 
 def get_reach(data):
     # Initialize a nested dictionary to hold the reach by date
-    reach_by_date = defaultdict(lambda: {"company1": 0, "company2": 0, "company3": 0})
+    reach_by_date = defaultdict(lambda: {"STC": 0, "Zain": 0, "Ooredoo": 0})
 
     # Process the data
     for record in data:
@@ -146,16 +165,16 @@ def get_reach(data):
     categories = sorted(reach_by_date.keys())  # Sorted dates
     series = [
         {
-            "name": "company1",
-            "data": [reach_by_date[date]["company1"] for date in categories]
+            "name": "STC",
+            "data": [reach_by_date[date]["STC"] for date in categories]
         },
         {
-            "name": "company2",
-            "data": [reach_by_date[date]["company2"] for date in categories]
+            "name": "Zain",
+            "data": [reach_by_date[date]["Zain"] for date in categories]
         },
         {
-            "name": "company3",
-            "data": [reach_by_date[date]["company3"] for date in categories]
+            "name": "Ooredoo",
+            "data": [reach_by_date[date]["Ooredoo"] for date in categories]
         }
     ]
 
@@ -485,16 +504,19 @@ def get_best_time_to_post(data):
 @app.route("/get-data", methods=["GET"])
 def get_data():
     processed_data = process_data()
-    general_stats = get_general_stats(processed_data)
-    volume_of_mentions = get_volume_of_mentions(processed_data)
-    reach = get_reach(processed_data)
-    sentiments_distribution = get_sentiments_distribution(processed_data)
-    positive_mentions_chart = get_positive_mentions_chart_data(processed_data, 'positive')
-    negative_mentions_chart = get_negative_mentions_chart_data(processed_data, 'negative')
-    emotion_chart_analysis = get_emotion_chart_analysis(processed_data)
-    language_analysis = get_language_analysis(processed_data)
-    sentiments_by_media = get_sentiments_by_media(processed_data)
-    best_time_to_post = get_best_time_to_post(processed_data)
+    initial_mapping = group_tracked_keywords(processed_data)
+    # print("initial mapping= ==", initial_mapping)
+    general_stats = get_general_stats(initial_mapping)
+    # print("these are gneral stat---", general_stats)
+    volume_of_mentions = get_volume_of_mentions(initial_mapping)
+    reach = get_reach(initial_mapping)
+    sentiments_distribution = get_sentiments_distribution(initial_mapping)
+    positive_mentions_chart = get_positive_mentions_chart_data(initial_mapping, 'positive')
+    negative_mentions_chart = get_negative_mentions_chart_data(initial_mapping, 'negative')
+    emotion_chart_analysis = get_emotion_chart_analysis(initial_mapping)
+    language_analysis = get_language_analysis(initial_mapping)
+    sentiments_by_media = get_sentiments_by_media(initial_mapping)
+    best_time_to_post = get_best_time_to_post(initial_mapping)
 
     return jsonify({
         "general_stats": general_stats,

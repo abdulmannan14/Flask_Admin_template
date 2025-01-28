@@ -8,11 +8,13 @@ function populateTableRecords(data) {
         "negative": data.sentiment_counts.negative
     };
 
+    console.log("====1===")
+
     // Function to populate the table
     function populateTable() {
         // Company rows (company1, company2, company3)
-        const companies = ["company1", "company2", "company3"];
-
+        const companies = ["STC", "Zain", "Ooredoo"];
+        console.log("====2===")
         // Loop through each company and update the table
         companies.forEach(company => {
             const companyRow = document.querySelector(`#${company}_row`);

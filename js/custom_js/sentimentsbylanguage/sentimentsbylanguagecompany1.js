@@ -14,10 +14,18 @@ function populateLanguageAnalysis1(data) {
                 color: '#333'
             }
         },
-        // legend: {
-        //     position: 'bottom', // Position of the legend
-        //     fontSize: '14px'
-        // },
+        legend: {
+            position: 'bottom', // Position of the legend
+            fontSize: '24px',
+            // color: '#ffffff',
+            // change the font color
+            labels: {
+                colors: '#ffffff', // Change the font color
+                useSeriesColors: false // Use the same color as the slice
+            },
+        },
+
+        colors: ['#ead12b', '#c93838', '#3ab93a', '#FEAF1A'], // Custom colors for the segments
         tooltip: {
             y: {
                 formatter: function (value) {
@@ -25,7 +33,9 @@ function populateLanguageAnalysis1(data) {
                 }
             }
         },
-        colors: ['#6C47B4', '#46BCA2', '#2473F2', '#FEAF1A'], // Custom colors for the segments
+        // legend: {
+        //     show: false // Disables the legend
+        // }
 
     };
 

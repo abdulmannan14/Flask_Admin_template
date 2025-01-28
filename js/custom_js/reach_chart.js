@@ -35,7 +35,7 @@ function populateReachChart(data) {
         xaxis: {
             categories: reachdummyData.categories,
             title: {
-                text: 'Months',
+                // text: 'Months',
                 style: {
                     color: '#ACB5BD' // Match the reference chart's axis label color
                 }
@@ -68,6 +68,7 @@ function populateReachChart(data) {
             opacity: 1 // Match reference chart's transparency
         },
         grid: {
+            show: false,
             borderColor: '#212529', // Match reference chart grid color
             strokeDashArray: 0 // Solid lines for the grid
         },
@@ -87,7 +88,7 @@ function populateReachChart(data) {
             text: 'Reach',
             align: 'left',
             style: {
-                fontSize: '18px',
+                fontSize: '28px',
                 fontWeight: 'bold',
                 color: '#ffffff' // Title color
             }

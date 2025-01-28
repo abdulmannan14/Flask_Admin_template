@@ -1,6 +1,6 @@
 function populateSentimentsByMedia1(data) {
     var sentimentsmediaoptions1 = {
-        series: data.company1.series,
+        series: data.STC.series,
         chart: {
             type: 'bar',
             height: 400,
@@ -16,6 +16,9 @@ function populateSentimentsByMedia1(data) {
                 // endingShape: 'rounded'
             }
         },
+        grid: {
+            show: false,
+        },
         dataLabels: {
             enabled: true,
             style: {
@@ -30,7 +33,7 @@ function populateSentimentsByMedia1(data) {
         //     colors: ['#fff']
         // },
         xaxis: {
-            categories: data.company1.categories,
+            categories: data.STC.categories,
             title: {
                 text: 'Social Media Platforms',
                 style: {

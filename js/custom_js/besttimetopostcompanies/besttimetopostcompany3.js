@@ -19,7 +19,7 @@ function populateBestTimeToPost3(data) {
                 },
             }
         },
-        series: data.company3,
+        series: data.Ooredoo,
         title: {
             // text: 'Single-Colored Heatmap Example',
             align: 'center',

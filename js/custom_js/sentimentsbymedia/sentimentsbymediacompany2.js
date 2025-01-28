@@ -1,6 +1,6 @@
 function populateSentimentsByMedia2(data) {
     var sentimentsmediaoptions2 = {
-        series: data.company2.series,
+        series: data.Zain.series,
         chart: {
             type: 'bar',
             height: 400,
@@ -24,13 +24,16 @@ function populateSentimentsByMedia2(data) {
                 colors: ['#fff']
             }
         },
+        grid: {
+            show: false,
+        },
         // stroke: {
         //     show: true,
         //     width: 1,
         //     colors: ['#fff']
         // },
         xaxis: {
-            categories: data.company2.categories,
+            categories: data.Zain.categories,
             title: {
                 text: 'Social Media Platforms',
                 style: {

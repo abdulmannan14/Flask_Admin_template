@@ -25,7 +25,18 @@ function populateLanguageAnalysis2(data) {
                 }
             }
         },
-        colors: ['#6C47B4', '#46BCA2', '#2473F2', '#FEAF1A'], // Custom colors for the segments
+        legend: {
+            position: 'bottom', // Position of the legend
+            fontSize: '24px',
+            // color: '#ffffff',
+            // change the font color
+            labels: {
+                colors: '#ffffff', // Change the font color
+                useSeriesColors: false // Use the same color as the slice
+            },
+        },
+
+        colors: ['#ead12b', '#c93838', '#3ab93a', '#FEAF1A'], // Custom colors for the segments
 
     };
 

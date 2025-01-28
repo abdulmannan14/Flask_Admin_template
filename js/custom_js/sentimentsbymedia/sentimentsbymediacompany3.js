@@ -1,6 +1,6 @@
 function populateSentimentsByMedia3(data) {
     var sentimentsmediaoptions3 = {
-        series:data.company3.series,
+        series: data.Ooredoo.series,
         chart: {
             type: 'bar',
             height: 400,
@@ -24,13 +24,16 @@ function populateSentimentsByMedia3(data) {
                 colors: ['#fff']
             }
         },
+        grid: {
+            show: false,
+        },
         // stroke: {
         //     show: true,
         //     width: 1,
         //     colors: ['#fff']
         // },
         xaxis: {
-            categories: data.company3.categories,
+            categories: data.Ooredoo.categories,
             title: {
                 text: 'Social Media Platforms',
                 style: {

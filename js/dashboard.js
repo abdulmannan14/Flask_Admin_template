@@ -8,9 +8,9 @@ async function fetchData() {
         populateTableRecords(data.general_stats); // Example for table
         populateMentionsChart(data.volume_of_mentions);
         populateReachChart(data.reach); // Example for reach
-        populatesentimentsdistributioncompany1(data.sentiments_distribution.company1); // Example for emotion
-        populatesentimentsdistributioncompany2(data.sentiments_distribution.company2); // Example for emotion
-        populatesentimentsdistributioncompany3(data.sentiments_distribution.company3); // Example for emotion
+        populatesentimentsdistributioncompany1(data.sentiments_distribution.STC); // Example for emotion
+        populatesentimentsdistributioncompany2(data.sentiments_distribution.Zain); // Example for emotion
+        populatesentimentsdistributioncompany3(data.sentiments_distribution.Ooredoo); // Example for emotion
         populatePositiveMentionChart(data.positive_mentions_chart);
         populateNegativetiveMentionChart(data.negative_mentions_chart);
         populateSentimentsByMedia1(data.sentiments_by_media);
@@ -25,9 +25,6 @@ async function fetchData() {
         populateBestTimeToPost1(data.best_time_to_post)
         populateBestTimeToPost2(data.best_time_to_post)
         populateBestTimeToPost3(data.best_time_to_post)
-        // populatePositiveFeedbackChart(data.sentiments); // Example for positive sentiment
-        // populateNegativeFeedbackChart(data.sentiments); // Example for negative sentiment
-        // populateSentimentBarCharts(data.sentiments); // For sentiment bar charts
 
     } catch (error) {
         console.error("Error fetching data:", error);
