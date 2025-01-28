@@ -30,7 +30,7 @@ def group_tracked_keywords(json_data):
 
 # Sample function to process the JSON data
 def process_data():
-    with open("balanced_dummy_aggregated_11k.json", "r") as file:
+    with open("aggregated.json", "r") as file:
         data = json.load(file)
         # print("data length is ====", len(data))
         # Example of data processing: filtering or aggregating
@@ -65,10 +65,16 @@ def get_general_stats(data):
             tracked_keywords_count[keyword] += 1
 
             # Sum REACH
-            reach_sum[keyword] += record.get("REACH", 0)
+            try:
+                reach_sum[keyword] += record.get("REACH", 0)
+            except:
+                pass
 
             # Sum SOCIAL MEDIA INTERACTIONS
-            social_interactions_sum[keyword] += record.get("SOCIAL MEDIA INTERACTIONS", 0)
+            try:
+                social_interactions_sum[keyword] += record.get("SOCIAL MEDIA INTERACTIONS", 0)
+            except:
+                pass
 
             # Count SENTIMENT
             if sentiment in sentiment_counts:
@@ -105,7 +111,10 @@ def get_volume_of_mentions(data):
         date = record["DATE"]
 
         # Extract the date (ignoring the time portion)
-        formatted_date = datetime.strptime(date, "%Y-%m-%d %H:%M").strftime("%Y-%m-%d")
+        try:
+            formatted_date = datetime.strptime(date, "%Y-%m-%d %H:%M").strftime("%Y-%m-%d")
+        except:
+            pass
 
         # Increment the count for the respective company on the specific date
         if keyword in volume_by_date[formatted_date]:
@@ -152,11 +161,17 @@ def get_reach(data):
         date = record["DATE"]
 
         # Extract the date (ignoring the time portion)
-        formatted_date = datetime.strptime(date, "%Y-%m-%d %H:%M").strftime("%Y-%m-%d")
+        try:
+            formatted_date = datetime.strptime(date, "%Y-%m-%d %H:%M").strftime("%Y-%m-%d")
+        except:
+            pass
 
         # Increment the reach for the respective company on the specific date
         if keyword in reach_by_date[formatted_date]:
-            reach_by_date[formatted_date][keyword] += record.get("REACH", 0)
+            try:
+                reach_by_date[formatted_date][keyword] += record.get("REACH", 0)
+            except:
+                pass
 
     # Convert defaultdict to a regular dictionary for processing
     reach_by_date = dict(reach_by_date)
@@ -239,7 +254,10 @@ def get_positive_mentions_chart_data(data, sentiment_type):
 
         # Parse date and use it as the key
         if date_str:
-            date_obj = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+            try:
+                date_obj = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+            except:
+                pass
             date_key = date_obj.strftime("%Y-%m-%d")  # Format as YYYY-MM-DD
 
             # Update the corresponding sentiment count
@@ -291,7 +309,10 @@ def get_negative_mentions_chart_data(data, sentiment_type):
 
         # Parse date and use it as the key
         if date_str:
-            date_obj = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+            try:
+                date_obj = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+            except:
+                pass
             date_key = date_obj.strftime("%Y-%m-%d")  # Format as YYYY-MM-DD
 
             # Update the corresponding sentiment count
@@ -476,7 +497,10 @@ def get_best_time_to_post(data):
 
         # Parse the date to extract day of the week and time
         if date_str:
-            date_obj = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+            try:
+                date_obj = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+            except:
+                pass
             day_of_week = date_obj.strftime("%A").lower()  # Get day name (e.g., Monday)
             hour = date_obj.hour
 

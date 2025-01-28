@@ -35,7 +35,7 @@ function populateSentimentsByMedia2(data) {
         xaxis: {
             categories: data.Zain.categories,
             title: {
-                text: 'Social Media Platforms',
+                // text: 'Social Media Platforms',
                 style: {
                     color: '#FF5733', // Custom color for X-axis title
                     fontSize: '16px',
@@ -52,7 +52,7 @@ function populateSentimentsByMedia2(data) {
         },
         yaxis: {
             title: {
-                text: 'Feedback Count',
+                // text: 'Feedback Count',
                 style: {
                     color: '#FF5733', // Custom color for X-axis title
                     fontSize: '16px',

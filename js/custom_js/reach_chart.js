@@ -55,7 +55,7 @@ function populateReachChart(data) {
                 }
             }
         },
-        colors: ['#6C47B4', '#48BCA2', '#2374F2'], // Updated to reference chart colors
+        colors: ['#6C47B4', '#48BCA2', '#d71111'], // Updated to reference chart colors
         dataLabels: {
             enabled: false
         },

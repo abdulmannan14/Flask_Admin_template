@@ -27,7 +27,7 @@ function populateLanguageAnalysis2(data) {
         },
         legend: {
             position: 'bottom', // Position of the legend
-            fontSize: '24px',
+            fontSize: '10px',
             // color: '#ffffff',
             // change the font color
             labels: {

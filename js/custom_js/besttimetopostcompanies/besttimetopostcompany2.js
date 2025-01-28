@@ -9,7 +9,7 @@ function populateBestTimeToPost2(data) {
                 colorScale: {
                     ranges: [{
                         from: -30,
-                        to: 95,
+                        to: 300,
                         color: '#6C47B4', // Single color for the entire range
                         name: 'Uniform',  // You can name the range however you want
                     }]
