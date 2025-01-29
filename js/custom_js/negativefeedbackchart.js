@@ -10,7 +10,7 @@ function populateNegativetiveMentionChart(data) {
         chart: {
             type: 'area',
             height: 350,
-            stacked: true,
+            stacked: false,
             toolbar: {
                 show: false // Hides the chart toolbar
             },
@@ -40,7 +40,7 @@ function populateNegativetiveMentionChart(data) {
                 }
             }
         },
-        colors: ['#d71111', '#6C47B4', '#48BCA2'], // Updated to reference chart colors
+        colors: ['#d71111', '#48BCA2', '#6C47B4'], // Updated to reference chart colors
         dataLabels: {
             enabled: false
         },

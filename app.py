@@ -4,6 +4,7 @@ from collections import defaultdict
 from datetime import datetime
 from flask_cors import CORS  # Import CORS
 import pandas as pd
+import pycountry
 
 app = Flask(__name__)
 CORS(app)
@@ -524,6 +525,37 @@ def get_best_time_to_post(data):
     return result
 
 
+def get_top_countries(data):
+    """
+        Extracts the list of unique country codes for each company.
+
+        Args:
+        - data (list): The list of dictionaries containing the data.
+
+        Returns:
+        - dict: Country codes for each company in the format {company: [country_codes]}
+        """
+    company_countries = defaultdict(set)  # Use set to avoid duplicate country codes
+
+    for entry in data:
+        company = entry.get("TRACKED KEYWORD", "Unknown")
+        country_name = entry.get("COUNTRY")
+
+        if country_name:
+            # Convert country name to country code
+            try:
+                country_code = pycountry.countries.lookup(country_name).alpha_2
+            except LookupError:
+                country_code = "Unknown"
+
+            # Store the country code
+            if country_code != "Unknown":
+                company_countries[company].add(country_code)
+
+    # Convert sets to lists for the final output
+    return {company: list(countries) for company, countries in company_countries.items()}
+
+
 # API endpoint to send processed data
 @app.route("/get-data", methods=["GET"])
 def get_data():
@@ -541,6 +573,7 @@ def get_data():
     language_analysis = get_language_analysis(initial_mapping)
     sentiments_by_media = get_sentiments_by_media(initial_mapping)
     best_time_to_post = get_best_time_to_post(initial_mapping)
+    top_countries = get_top_countries(initial_mapping)
 
     return jsonify({
         "general_stats": general_stats,
@@ -552,7 +585,8 @@ def get_data():
         "emotion_chart_analysis": emotion_chart_analysis,
         "language_analysis": language_analysis,
         "sentiments_by_media": sentiments_by_media,
-        "best_time_to_post": best_time_to_post
+        "best_time_to_post": best_time_to_post,
+        "top_countries": top_countries
     })
 
 

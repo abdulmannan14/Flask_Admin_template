@@ -25,6 +25,9 @@ async function fetchData() {
         populateBestTimeToPost1(data.best_time_to_post)
         populateBestTimeToPost2(data.best_time_to_post)
         populateBestTimeToPost3(data.best_time_to_post)
+        populateworldmap1(data.top_countries.STC)
+        populateworldmap2(data.top_countries.Zain)
+        populateworldmap3(data.top_countries.Ooredoo)
 
     } catch (error) {
         console.error("Error fetching data:", error);

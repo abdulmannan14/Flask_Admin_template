@@ -23,7 +23,7 @@ function populateMentionsChart(data) {
         chart: {
             type: 'area',
             height: 350,
-            stacked: true,
+            stacked: false,
             toolbar: {
                 show: false // Hides the chart toolbar
             },
